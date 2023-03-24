@@ -358,16 +358,16 @@ function onSubmit(e) {
     setTimeout(() => msg.remove(), 3000);
   } else {
     // Create new list item with user
-    // const li = document.createElement('li');
+    const li = document.createElement('li');
 
     // Add text node with input values
     // li.appendChild(document.createTextNode(`${nameInput.value}: ${emailInput.value}`));
 
     // Add HTML
-    // li.innerHTML = `<strong>${nameInput.value}</strong>: ${emailInput.value}`;
+    li.innerHTML = `<strong>${nameInput.value}</strong>: ${emailInput.value} <button class="btn-danger btn-sm float-right delete">X</button>`;
 
     // Append to ul
-    // userList.appendChild(li);
+    userList.appendChild(li);
 
     let myObj = {
         name: nameInput.value,
@@ -388,3 +388,17 @@ function onSubmit(e) {
     emailInput.value = '';
   }
 }
+
+var itemList = document.getElementById('users');
+itemList.addEventListener('click', removeItem);
+
+function removeItem(e){
+    if(e.target.classList.contains('delete')){
+      if(confirm('Are You Sure?')){
+        var li = e.target.parentElement;
+        console.log(li);
+        itemList.removeChild(li);
+        localStorage.removeItem(e.target.parentElement.firstElementChild.innerHTML);
+      }
+    }
+  }
