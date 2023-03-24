@@ -368,8 +368,20 @@ function onSubmit(e) {
 
     // Append to ul
     // userList.appendChild(li);
-    localStorage.setItem('userDetails', nameInput.value);
-    localStorage.setItem('emailId', emailInput.value);
+
+    let myObj = {
+        name: nameInput.value,
+        emailId: emailInput.value
+    };
+    
+    let myObj_serialized = JSON.stringify(myObj);
+
+    localStorage.setItem("myObj", myObj_serialized);
+
+    // localStorage.setItem('userDetails', nameInput.value);
+    // localStorage.setItem('emailId', emailInput.value);
+
+
 
     // Clear fields
     nameInput.value = '';
