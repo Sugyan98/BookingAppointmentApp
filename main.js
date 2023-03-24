@@ -364,7 +364,7 @@ function onSubmit(e) {
     // li.appendChild(document.createTextNode(`${nameInput.value}: ${emailInput.value}`));
 
     // Add HTML
-    li.innerHTML = `<strong>${nameInput.value}</strong>: ${emailInput.value} <button class="btn-danger btn-sm float-right delete">X</button>`;
+    li.innerHTML = `<strong>${nameInput.value}</strong>: ${emailInput.value} <button class="btn-secondary btn-sm float-right edit">Edit</button> <button class="btn-danger btn-sm float-right delete">X</button>`;
 
     // Append to ul
     userList.appendChild(li);
@@ -396,9 +396,19 @@ function removeItem(e){
     if(e.target.classList.contains('delete')){
       if(confirm('Are You Sure?')){
         var li = e.target.parentElement;
-        console.log(li);
         itemList.removeChild(li);
-        localStorage.removeItem(e.target.parentElement.firstElementChild.innerHTML);
+        localStorage.removeItem(li.firstElementChild.innerHTML);
       }
     }
+    else if(e.target.classList.contains('edit')){
+        var li = e.target.parentElement;
+        var myObj_parsed = JSON.parse(localStorage.getItem(li.firstElementChild.innerHTML));
+        // console.log(myObj_parsed);
+        itemList.removeChild(li);
+        localStorage.removeItem(li.firstElementChild.innerHTML);
+        
+        nameInput.value = myObj_parsed.name;
+        emailInput.value = myObj_parsed.emailId;
+    }
+
   }
