@@ -373,10 +373,21 @@ function onSubmit(e) {
         name: nameInput.value,
         emailId: emailInput.value
     };
-    
-    let myObj_serialized = JSON.stringify(myObj);
 
-    localStorage.setItem(nameInput.value, myObj_serialized);
+    //axios-crudcrud storage//
+
+    axios.post("https://crudcrud.com/api/3298ea029c594c5db93bdde380e5afc2/appointmentData", myObj)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+    
+    // let myObj_serialized = JSON.stringify(myObj);
+
+    // localStorage.setItem(nameInput.value, myObj_serialized);
 
     // localStorage.setItem('userDetails', nameInput.value);
     // localStorage.setItem('emailId', emailInput.value);
@@ -397,6 +408,7 @@ function removeItem(e){
       if(confirm('Are You Sure?')){
         var li = e.target.parentElement;
         itemList.removeChild(li);
+        console.log(li.firstElementChild.innerHTML);
         localStorage.removeItem(li.firstElementChild.innerHTML);
       }
     }
