@@ -10,8 +10,9 @@ const userList = document.querySelector('#users');
 function createUser(obj) {
   
   // Create new list item with user
-    const li = document.createElement('li');
+  const li = document.createElement('li');
 
+  li.setAttribute('id',obj._id)
   // Add HTML
   li.innerHTML = `<strong>${obj.name}</strong>: ${obj.emailId} <button class="btn-secondary btn-sm float-right edit">Edit</button> <button class="btn-danger btn-sm float-right delete">X</button>`;
 
@@ -48,12 +49,11 @@ function onSubmit(e) {
         emailId: emailInput.value
     };
 
-    createUser(myObj)
     //axios-crudcrud storage//
 
     axios.post("https://crudcrud.com/api/3298ea029c594c5db93bdde380e5afc2/appointmentData", myObj)
       .then((response) => {
-        console.log(response)
+        createUser(response.data)
       })
       .catch((err) => {
         console.log(err)
@@ -73,19 +73,20 @@ function removeItem(e){
       if(confirm('Are You Sure?')){
         var li = e.target.parentElement;
         itemList.removeChild(li);
-        console.log(li.firstElementChild.innerHTML);
-        localStorage.removeItem(li.firstElementChild.innerHTML);
+        axios.delete("https://crudcrud.com/api/3298ea029c594c5db93bdde380e5afc2/appointmentData/"+li.getAttribute("id"));
       }
     }
     else if(e.target.classList.contains('edit')){
         var li = e.target.parentElement;
-        var myObj_parsed = JSON.parse(localStorage.getItem(li.firstElementChild.innerHTML));
-        // console.log(myObj_parsed);
-        itemList.removeChild(li);
-        localStorage.removeItem(li.firstElementChild.innerHTML);
+        axios.get("https://crudcrud.com/api/3298ea029c594c5db93bdde380e5afc2/appointmentData/"+li.getAttribute("id"))
+          .then(response => {
+            nameInput.value = response.data.name;
+            emailInput.value = response.data.emailId;
+          })
         
-        nameInput.value = myObj_parsed.name;
-        emailInput.value = myObj_parsed.emailId;
+        itemList.removeChild(li);
+        axios.delete("https://crudcrud.com/api/3298ea029c594c5db93bdde380e5afc2/appointmentData/"+li.getAttribute("id"));
+    
     }
 
   }
