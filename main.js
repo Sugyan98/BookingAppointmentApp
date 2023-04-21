@@ -62,16 +62,6 @@ function onSubmit(e) {
         console.log(err)
       })
 
-    
-    // let myObj_serialized = JSON.stringify(myObj);
-
-    // localStorage.setItem(nameInput.value, myObj_serialized);
-
-    // localStorage.setItem('userDetails', nameInput.value);
-    // localStorage.setItem('emailId', emailInput.value);
-
-
-
     // Clear fields
     nameInput.value = '';
     emailInput.value = '';
