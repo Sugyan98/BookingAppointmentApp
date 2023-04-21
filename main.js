@@ -12,9 +12,6 @@ function createUser(obj) {
   // Create new list item with user
     const li = document.createElement('li');
 
-  // Add text node with input values
-  // li.appendChild(document.createTextNode(`${nameInput.value}: ${emailInput.value}`));
-
   // Add HTML
   li.innerHTML = `<strong>${obj.name}</strong>: ${obj.emailId} <button class="btn-secondary btn-sm float-right edit">Edit</button> <button class="btn-danger btn-sm float-right delete">X</button>`;
 
