@@ -21,7 +21,7 @@ function createUser(obj) {
 
 }
 
-axios.get("https://crudcrud.com/api/9c8373d865fd4480b59ee456540ce9d6/appointmentData")
+axios.get("https://crudcrud.com/api/2125c9bab75a4f7183baa1252fa1463c/appointmentData")
   .then((response) => {
     for(var i=0; i < response.data.length; i++){
       createUser(response.data[i])
@@ -51,7 +51,7 @@ function onSubmit(e) {
 
     //axios-crudcrud storage//
 
-    axios.post("https://crudcrud.com/api/9c8373d865fd4480b59ee456540ce9d6/appointmentData", myObj)
+    axios.post("https://crudcrud.com/api/2125c9bab75a4f7183baa1252fa1463c/appointmentData", myObj)
       .then((response) => {
         createUser(response.data)
       })
@@ -73,19 +73,19 @@ function removeItem(e){
       if(confirm('Are You Sure?')){
         var li = e.target.parentElement;
         itemList.removeChild(li);
-        axios.delete("https://crudcrud.com/api/9c8373d865fd4480b59ee456540ce9d6/appointmentData/"+li.getAttribute("id"));
+        axios.delete("https://crudcrud.com/api/2125c9bab75a4f7183baa1252fa1463c/appointmentData/"+li.getAttribute("id"));
       }
     }
     else if(e.target.classList.contains('edit')){
         var li = e.target.parentElement;
-        axios.get("https://crudcrud.com/api/9c8373d865fd4480b59ee456540ce9d6/appointmentData/"+li.getAttribute("id"))
+        axios.get("https://crudcrud.com/api/2125c9bab75a4f7183baa1252fa1463c/appointmentData/"+li.getAttribute("id"))
           .then(response => {
             nameInput.value = response.data.name;
             emailInput.value = response.data.emailId;
           })
         
         itemList.removeChild(li);
-        axios.delete("https://crudcrud.com/api/9c8373d865fd4480b59ee456540ce9d6/appointmentData/"+li.getAttribute("id"));
+        axios.delete("https://crudcrud.com/api/2125c9bab75a4f7183baa1252fa1463c/appointmentData/"+li.getAttribute("id"));
     
     }
 
